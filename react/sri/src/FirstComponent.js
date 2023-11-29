@@ -18,6 +18,14 @@ const FirstComponent = ({
         in {details.address} is {isStudent ? " " : "not"} a student, his
         subjects are: {/*props.subjects.join(", ")*/}
       </p>
+
+      <button
+        onClick={(e) => console.log(e)}
+        onMouseOver={(e) => console.log(e)}
+      >
+        Click here!
+      </button>
+
       <ul>
         {/*mapping array to should be done to use it*/}
         {subjects.map((s) => (
