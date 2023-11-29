@@ -11,10 +11,11 @@ const FirstComponent = (abc) => {
         {/*abc.subjects.join(", ")*/}
       </p>
       <ul>
-        {/*mapping array to use it*/}
+        {/*mapping array to should be done to use it*/}
         {abc.subjects.map((s) => (
           <li key={s}>{s}</li>
         ))}
+        Square of his age is {abc.square(abc.age)}
       </ul>
     </div>
   );
