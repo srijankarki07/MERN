@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
+import FirstComponent from "./FirstComponent";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         >
           Let's get connected
         </a>
+        <FirstComponent name="Test" courseName="MERN" />
       </header>
     </div>
   );
