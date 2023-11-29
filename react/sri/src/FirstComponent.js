@@ -1,22 +1,29 @@
 /*here abc is an object*/
-const FirstComponent = (props) => {
+const FirstComponent = ({
+  name,
+  courseName,
+  age,
+  isStudent,
+  details,
+  subjects,
+  square,
+}) => {
   return (
     <div>
       <p>Creating First Component</p>
-      <h1>{props.name}</h1>
-      <h2>{props.courseName}</h2>
+      <h1>{name}</h1>
+      <h2>{courseName}</h2>
       <p>
-        {props.details.name} is {props.age} years old and has{" "}
-        {props.details.bloodGroup} and lives in {props.details.address} is{" "}
-        {props.isStudent ? " " : "not"} a student, his subjects are:{" "}
-        {/*props.subjects.join(", ")*/}
+        {details.name} is {age} years old and has {details.bloodGroup} and lives
+        in {details.address} is {isStudent ? " " : "not"} a student, his
+        subjects are: {/*props.subjects.join(", ")*/}
       </p>
       <ul>
         {/*mapping array to should be done to use it*/}
-        {props.subjects.map((s) => (
+        {subjects.map((s) => (
           <li key={s}>{s}</li>
         ))}
-        Square of his age is {props.square(props.age)}
+        Square of his age is {square(age)}
       </ul>
     </div>
   );
