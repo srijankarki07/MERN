@@ -12,7 +12,7 @@ const FirstComponent = ({
   //boolean state setting example
   const [testBoolean, setBoolean] = useState(isStudent);
   const [count, setCount] = useState(age);
-
+  //number state setting example
   console.log(typeof testBoolean, typeof setBoolean, "check state");
   //function for click event
   const handleClick = () => {
@@ -51,6 +51,7 @@ const FirstComponent = ({
         Click here!
       </button>
       <button onClick={(e) => setCount(count + 1)}>+</button>
+      <button onClick={(e) => setCount(count - 1)}>-</button>
     </div>
   );
 };
