@@ -1,4 +1,5 @@
 /*here abc is an object*/
+import { useState } from "react";
 const FirstComponent = ({
   name,
   courseName,
@@ -8,6 +9,8 @@ const FirstComponent = ({
   subjects,
   square,
 }) => {
+  const [a, b] = useState(false);
+  console.log(typeof a, typeof b, "check state");
   //function for click event
   const handleClick = () => {
     console.log("hello,guys");
@@ -20,8 +23,8 @@ const FirstComponent = ({
       <h2>{courseName}</h2>
       <p>
         {details.name} is {age} years old and has {details.bloodGroup} and lives
-        in {details.address} is {isStudent ? " " : "not"} a student, his
-        subjects are: {/*props.subjects.join(", ")*/}
+        in {details.address} is {a ? " " : "not"} a student, his subjects are:{" "}
+        {/*props.subjects.join(", ")*/}
       </p>
 
       <ul>
@@ -35,10 +38,7 @@ const FirstComponent = ({
       <button onClick={handleClick}>Click Events</button>
       <br></br>
 
-      <button
-        onClick={(e) => console.log(e)}
-        onMouseOver={(e) => console.log(e)}
-      >
+      <button onClick={(e) => b(!a)} onMouseOver={(e) => console.log(e)}>
         Click here!
       </button>
     </div>
