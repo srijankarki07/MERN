@@ -8,8 +8,13 @@ const FirstComponent = ({
   subjects,
   square,
 }) => {
+  //function for click event
+  const handleClick = () => {
+    console.log("hello,guys");
+  };
+
   return (
-    <div>
+    <div id="mycomponent">
       <p>Creating First Component</p>
       <h1>{name}</h1>
       <h2>{courseName}</h2>
@@ -19,13 +24,6 @@ const FirstComponent = ({
         subjects are: {/*props.subjects.join(", ")*/}
       </p>
 
-      <button
-        onClick={(e) => console.log(e)}
-        onMouseOver={(e) => console.log(e)}
-      >
-        Click here!
-      </button>
-
       <ul>
         {/*mapping array to should be done to use it*/}
         {subjects.map((s) => (
@@ -33,6 +31,16 @@ const FirstComponent = ({
         ))}
         Square of his age is {square(age)}
       </ul>
+      {/*handling click events*/}
+      <button onClick={handleClick}>Click Events</button>
+      <br></br>
+
+      <button
+        onClick={(e) => console.log(e)}
+        onMouseOver={(e) => console.log(e)}
+      >
+        Click here!
+      </button>
     </div>
   );
 };
