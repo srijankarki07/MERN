@@ -10,7 +10,9 @@ const FirstComponent = ({
   square,
 }) => {
   //boolean state setting example
-  const [testBoolean, setBoolean] = useState(false);
+  const [testBoolean, setBoolean] = useState(isStudent);
+  const [count, setCount] = useState(age);
+
   console.log(typeof testBoolean, typeof setBoolean, "check state");
   //function for click event
   const handleClick = () => {
@@ -18,16 +20,20 @@ const FirstComponent = ({
   };
 
   return (
-    <div id="mycomponent">
+    <div
+      id="mycomponent"
+      style={{
+        color: testBoolean ? "red" : "green",
+      }}
+    >
       <p>Creating First Component</p>
       <h1>{name}</h1>
-      <h2>{courseName}</h2>
+      {testBoolean && <h2>{courseName}</h2>}
       <p>
-        {details.name} is {age} years old and has {details.bloodGroup} and lives
-        in {details.address} is {testBoolean ? " " : "not"} a student, his
+        {details.name} is {count} years old and has {details.bloodGroup} and
+        lives in {details.address} is {testBoolean ? " " : "not"} a student, his
         subjects are: {/*props.subjects.join(", ")*/}
       </p>
-
       <ul>
         {/*mapping array to should be done to use it*/}
         {subjects.map((s) => (
@@ -38,13 +44,13 @@ const FirstComponent = ({
       {/*handling click events*/}
       <button onClick={handleClick}>Click Events</button>
       <br></br>
-
       <button
         onClick={(e) => setBoolean(!testBoolean)}
         onMouseOver={(e) => console.log(e)}
       >
         Click here!
       </button>
+      <button onClick={(e) => setCount(count + 1)}>+</button>
     </div>
   );
 };
