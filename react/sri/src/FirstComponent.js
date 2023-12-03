@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { AiFillDelete } from "react-icons/ai";
-import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { CiEdit } from "react-icons/ci";
+
 const FirstComponent = ({
   name,
   courseName,
@@ -44,10 +45,12 @@ const FirstComponent = ({
         >
           Click here!
         </button>
-        <button onClick={(e) => setCount(count + 1)}>Click here add age</button>
+        <br></br>
+        <button onClick={(e) => setCount(count + 1)}>+</button>
         <button onClick={(e) => setCount(count > 1 ? count - 1 : count)}>
-          Click here sub age
+          -
         </button>
+        <br></br>
         <input
           placeholder="enter name of subject"
           value={subject}
@@ -87,7 +90,7 @@ const FirstComponent = ({
           // key needs to be provided for a list as during array use all the elements must be provided a unique key
           <li key={s}>
             {s}{" "}
-            <FaRegEdit
+            <CiEdit
               color="e6f3ff"
               onClick={(e) => {
                 setEditMode(true);
@@ -96,7 +99,7 @@ const FirstComponent = ({
               }}
             />
             {/* places only the elements that is not equal to s */}
-            <AiFillDelete
+            <RiDeleteBin5Line
               color="4d7a4d"
               onClick={(e) => setSubs(subs.filter((x) => x !== s))}
             />
