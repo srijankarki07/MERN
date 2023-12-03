@@ -1,5 +1,6 @@
 import "./App.css";
 import FirstComponent from "./FirstComponent";
+import NepseStocks from "./NepseStocks";
 
 function App() {
   return (
@@ -11,10 +12,8 @@ function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          Let's get connected
-        </a>
-        <FirstComponent
+        ></a>
+        {/*<FirstComponent
           name="Test"
           courseName={"MERN"}
           age={23}
@@ -24,7 +23,9 @@ function App() {
           //array
           subjects={["mongodb", "ExpressJS", "ReactJS", "NodeJS"]}
           square={(x) => x * x}
-        />
+  />*/}
+
+        <NepseStocks name="STOCKS" />
       </header>
     </div>
   );
