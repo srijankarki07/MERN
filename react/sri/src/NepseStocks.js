@@ -2,10 +2,19 @@ import { useState } from "react";
 import { STOCKS } from "./constants";
 
 const NepseStocks = () => {
-  const [stocks, listStocks] = useState(STOCKS);
+  const [stocks] = useState(STOCKS);
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <div>
       <p> STOCKS</p>
+
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
       <ul>
         {stocks.map((s) => (
           /* <li key={s}>
