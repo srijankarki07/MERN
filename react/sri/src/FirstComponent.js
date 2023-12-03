@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { MdOutlineDeleteForever } from "react-icons/md";
-import { CiEdit } from "react-icons/ci";
+import { AiFillDelete } from "react-icons/ai";
+import { FaRegEdit } from "react-icons/fa";
 const FirstComponent = ({
   name,
   courseName,
@@ -15,7 +15,7 @@ const FirstComponent = ({
 
   // number state example
   const [count, setCount] = useState(age);
-  //console.log(typeof testBoolean, typeof setTestBoolean, "check state");
+  console.log(typeof testBoolean, typeof setTestBoolean, "check state");
 
   // array state setting example
   const [subs, setSubs] = useState(subjects);
@@ -23,14 +23,13 @@ const FirstComponent = ({
   //string state setting example
   const [subject, setSubjects] = useState("");
 
-  //edit state example
-  const [toggleSubmit, setToggleSubmit] = useState(true);
+  const [editMode, setEditMode] = useState(false);
 
-  const [updateIndex, setUpdateIndex] = useState(null); // New state to keep track of the index to be updated
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
     // providing an id to uniquely identify the components
-    <div id="myComponent" style={{ color: testBoolean ? "yellow" : "green" }}>
+    <div id="myComponent" style={{ color: testBoolean ? "black" : "white" }}>
       <p>For example</p>
       <h1>{name}</h1>
       {testBoolean && <h1>{courseName}</h1>}
@@ -45,40 +44,41 @@ const FirstComponent = ({
         >
           Click here!
         </button>
-        <br></br>
-        <button onClick={(e) => setCount(count + 1)}>+</button>
+        <button onClick={(e) => setCount(count + 1)}>Click here add age</button>
         <button onClick={(e) => setCount(count > 1 ? count - 1 : count)}>
-          -
+          Click here sub age
         </button>
-        <br></br>
         <input
           placeholder="enter name of subject"
           value={subject}
           // here e stands for event so we take the target value of the onChange event
           onChange={(e) => setSubjects(e.target.value)}
         />
-        {toggleSubmit ? (
-          <button
-            onClick={(e) => {
+        <button
+          onClick={(e) => {
+            if (editMode) {
+              setSubs(subs.map((y, i) => (selectedIndex === i ? subject : y)));
+              setEditMode(false);
+              setSubjects("");
+              setSelectedIndex(-1);
+            } else {
               setSubs([subject, ...subs]);
               // added as to remove the text in textbox
               setSubjects("");
-            }}
-          >
-            Add subjects
-          </button>
-        ) : (
+            }
+          }}
+        >
+          {editMode ? "Update" : "Add"} subject
+        </button>
+        {editMode && (
           <button
-            onClick={(e) => {
-              // Use the updateIndex to replace the existing subject at that index
-              const updatedSubs = [...subs];
-              updatedSubs[updateIndex] = subject;
-              setSubs(updatedSubs);
+            onClick={() => {
+              setEditMode(false);
               setSubjects("");
-              setToggleSubmit(true); // Reset the form to "Add" mode
+              setSelectedIndex(-1);
             }}
           >
-            Update subjects
+            Cancel
           </button>
         )}
       </p>
@@ -87,16 +87,16 @@ const FirstComponent = ({
           // key needs to be provided for a list as during array use all the elements must be provided a unique key
           <li key={s}>
             {s}{" "}
-            <CiEdit
+            <FaRegEdit
               color="e6f3ff"
               onClick={(e) => {
-                setToggleSubmit(false);
-                setSubjects(subs[index]);
-                setUpdateIndex(index); // Set the index to be updated
+                setEditMode(true);
+                setSelectedIndex(index);
+                setSubjects(s);
               }}
             />
             {/* places only the elements that is not equal to s */}
-            <MdOutlineDeleteForever
+            <AiFillDelete
               color="4d7a4d"
               onClick={(e) => setSubs(subs.filter((x) => x !== s))}
             />
