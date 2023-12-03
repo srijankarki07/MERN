@@ -1,8 +1,6 @@
-/*here abc is an object*/
 import { useState } from "react";
-import { MdAutoDelete } from "react-icons/md";
+import { MdOutlineDeleteForever } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
-
 const FirstComponent = ({
   name,
   courseName,
@@ -12,81 +10,100 @@ const FirstComponent = ({
   subjects,
   square,
 }) => {
-  //boolean state setting example
-  const [testBoolean, setBoolean] = useState(isStudent);
+  // testBoolean=> same type as parameter and setTestBoolean will be a function
+  const [testBoolean, setTestBoolean] = useState(isStudent);
 
-  //number state setting example
+  // number state example
   const [count, setCount] = useState(age);
+  //console.log(typeof testBoolean, typeof setTestBoolean, "check state");
 
-  //array state setting example
+  // array state setting example
   const [subs, setSubs] = useState(subjects);
 
-  const [subject, setSubject] = useState(" ");
+  //string state setting example
+  const [subject, setSubjects] = useState("");
 
-  //console.log(typeof testBoolean, typeof setBoolean, "check state");
+  //edit state example
+  const [toggleSubmit, setToggleSubmit] = useState(true);
+
+  const [updateIndex, setUpdateIndex] = useState(null); // New state to keep track of the index to be updated
 
   return (
-    <div
-      id="mycomponent"
-      style={{
-        color: testBoolean ? "red" : "green",
-      }}
-    >
-      <p>Creating First Component</p>
+    // providing an id to uniquely identify the components
+    <div id="myComponent" style={{ color: testBoolean ? "yellow" : "green" }}>
+      <p>For example</p>
       <h1>{name}</h1>
-      {testBoolean && <h2>{courseName}</h2>}
+      {testBoolean && <h1>{courseName}</h1>}
       <p>
-        {details.name} is {count} years old and has {details.bloodGroup} and
-        lives in {details.address} is {testBoolean ? " " : "not"} a student, his
-        subjects are: {/*props.subjects.join(", ")*/}
+        {details.name} is {count} years old and has {details.bloodGroup} blood
+        and lives in {details.address} and is {testBoolean ? "" : "not "} a
+        student whose Square of his age is {square(age)} and who has the
+        subjects are :
+        <button
+          onClick={(e) => setTestBoolean(!testBoolean)}
+          onMouseOver={(e) => console.log(e)}
+        >
+          Click here!
+        </button>
+        <br></br>
+        <button onClick={(e) => setCount(count + 1)}>+</button>
+        <button onClick={(e) => setCount(count > 1 ? count - 1 : count)}>
+          -
+        </button>
+        <br></br>
+        <input
+          placeholder="enter name of subject"
+          value={subject}
+          // here e stands for event so we take the target value of the onChange event
+          onChange={(e) => setSubjects(e.target.value)}
+        />
+        {toggleSubmit ? (
+          <button
+            onClick={(e) => {
+              setSubs([subject, ...subs]);
+              // added as to remove the text in textbox
+              setSubjects("");
+            }}
+          >
+            Add subjects
+          </button>
+        ) : (
+          <button
+            onClick={(e) => {
+              // Use the updateIndex to replace the existing subject at that index
+              const updatedSubs = [...subs];
+              updatedSubs[updateIndex] = subject;
+              setSubs(updatedSubs);
+              setSubjects("");
+              setToggleSubmit(true); // Reset the form to "Add" mode
+            }}
+          >
+            Update subjects
+          </button>
+        )}
       </p>
       <ul>
-        <input
-          placeholder="Enter name of subjects"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-        />
-        <button
-          onClick={(e) => {
-            setSubs([subject, ...subs]);
-            setSubject("");
-          }}
-        >
-          Add subjects
-        </button>
-        {/*mapping array to should be done to use it*/}
-        {subs.map((s) => (
+        {subs.map((s, index) => (
+          // key needs to be provided for a list as during array use all the elements must be provided a unique key
           <li key={s}>
-            {" "}
             {s}{" "}
             <CiEdit
-              color={"#368692"}
-              onClick={(e) => setSubs(subs.filter((x) => x !== s))}
+              color="e6f3ff"
+              onClick={(e) => {
+                setToggleSubmit(false);
+                setSubjects(subs[index]);
+                setUpdateIndex(index); // Set the index to be updated
+              }}
             />
-            <MdAutoDelete
-              color={"#870606"}
+            {/* places only the elements that is not equal to s */}
+            <MdOutlineDeleteForever
+              color="4d7a4d"
               onClick={(e) => setSubs(subs.filter((x) => x !== s))}
             />
           </li>
         ))}
-        Square of his age is {square(age)}
       </ul>
-
-      <button
-        onClick={(e) => setBoolean(!testBoolean)}
-        onMouseOver={(e) => console.log(e)}
-      >
-        Click here!
-      </button>
-      <br></br>
-      <button onClick={(e) => setCount(count < 20 ? count + 1 : count)}>
-        +
-      </button>
-      <button onClick={(e) => setCount(count > 1 ? count - 1 : count)}>
-        -
-      </button>
-
-      {/*<form>
+      {/* <form>
         <input type="button" />
         <input type="checkbox" />
         <input type="color" />
@@ -109,9 +126,10 @@ const FirstComponent = ({
         <input type="time" />
         <input type="url" />
         <input type="week" />
-        </form>*/}
+      </form> */}
     </div>
   );
 };
 
+// something needs need to be exported when a file is created
 export default FirstComponent;
