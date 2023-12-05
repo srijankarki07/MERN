@@ -13,7 +13,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         ></a>
-        {/*<FirstComponent
+        <FirstComponent
           name="Test"
           courseName={"MERN"}
           age={23}
@@ -23,9 +23,9 @@ function App() {
           //array
           subjects={["mongodb", "ExpressJS", "ReactJS", "NodeJS"]}
           square={(x) => x * x}
-  />*/}
+        />
 
-        <NepseStocks name="STOCKS" />
+        {/* <NepseStocks name="STOCKS" /> */}
       </header>
     </div>
   );

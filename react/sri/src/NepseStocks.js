@@ -4,31 +4,50 @@ import { STOCKS } from "./constants";
 const NepseStocks = () => {
   const [stocks] = useState(STOCKS);
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredStocks, setFilteredStocks] = useState([]); // State for stocks filtered based on the search term
+
+  // Function to filter stocks based on a search term
+  const searchStock = (word, arr) =>
+    // Using the filter method to create a new array with stocks that match the search term
+    arr.filter((x) =>
+      // Checking if the lowercase securityId of each stock includes the lowercase search term
+      x.securityId.toLowerCase().includes(word.toLowerCase())
+    );
+  // Event handler for the search button click
+  const handleSearch = () => {
+    // Calling the searchStock function with the current search term and the original list of stocks
+    const filtered = searchStock(searchTerm, stocks);
+
+    // Updating the state with the filtered list of stocks
+    setFilteredStocks(filtered);
+  };
+
   return (
     <div>
-      <p> STOCKS</p>
-
+      {/* Input field for entering the security ID */}
       <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-bar"
+        placeholder="Enter security ID"
+        onChange={(e) => setSearchTerm(e.target.value)} // Updating the search term state on input change
       />
+      {/* Button for triggering the search */}
+      <button className="button" onClick={handleSearch}>
+        Search
+      </button>
+      {/* List to display the filtered stocks */}
 
       <ul>
-        {stocks.map((s) => (
-          /* <li key={s}>
-            <strong>{s}:</strong> {s.securityName}
-          </li>*/
-          // <li key={s.securityId}>{s.securityName}</li>
-
-          <li key={s}>
-            <strong>Security Name:</strong> {s.securityName}
-            <br />
-            <strong>Symbol:</strong> {s.symbol}
-            <br />
-            <strong>Total Trade Quantity:</strong> {s.totalTradeQuantity}
-            <br />
+        {/* Mapping through the filtered stocks and rendering individual stock information */}
+        {filteredStocks.map((s) => (
+          <li key={s.securityId}>
+            {/* Displaying stock information */}
+            Name: {s.securityName}
+            {/* Nested list for additional details */}
+            <ul className="sublist">
+              <li>Stock ID: {s.securityId}</li>
+              <li>Last Traded Price: {s.lastTradedPrice}</li>
+              <li>Symbol: {s.symbol}</li>
+            </ul>
           </li>
         ))}
       </ul>
@@ -36,4 +55,5 @@ const NepseStocks = () => {
   );
 };
 
+// Exporting the StockComponent as the default export
 export default NepseStocks;
