@@ -27,12 +27,11 @@ const FirstComponent = ({
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
-  const [delcon, setdelcon] = useState(false);
+  const [delalrt, setdelalrt] = useState(false);
 
   return (
     // providing an id to uniquely identify the components
-    <div id="myComponent" style={{ color: testBoolean ? "black" : "white" }}>
-      <p>For example</p>
+    <div id="myComponent" style={{ color: testBoolean ? "yellow" : "green" }}>
       <h1>{name}</h1>
       {testBoolean && <h1>{courseName}</h1>}
       <p>
@@ -46,12 +45,13 @@ const FirstComponent = ({
         >
           Click here!
         </button>
-        <button onClick={(e) => setCount(count + 1)}>Click here add age</button>
+        <button onClick={(e) => setCount(count + 1)}> + </button>
         <button onClick={(e) => setCount(count > 1 ? count - 1 : count)}>
-          Click here sub age
+          -
         </button>
+        <br></br>
         <input
-          placeholder="enter name of subject"
+          placeholder="Enter your subject"
           value={subject}
           // here e stands for event so we take the target value of the onChange event
           onChange={(e) => setSubjects(e.target.value)}
@@ -101,17 +101,15 @@ const FirstComponent = ({
             <AiFillDelete
               color="4d7a4d"
               onClick={(e) => {
-                if (delcon) {
-                  const shouldDelete = window.confirm(
-                    "Are you sure you want to delete?"
-                  );
-                  setdelcon(false);
+                if (delalrt) {
+                  const shouldDelete = window.confirm("Do you want to delete?");
+                  setdelalrt(false);
                   if (shouldDelete) {
                     setSubs(subs.filter((x) => x !== s));
-                    setdelcon(false);
+                    setdelalrt(false);
                   }
                 } else {
-                  setdelcon(true);
+                  setdelalrt(true);
                 }
               }}
             />
