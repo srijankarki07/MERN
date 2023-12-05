@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { RiDeleteBin5Line } from "react-icons/ri";
-import { CiEdit } from "react-icons/ci";
-
+import { AiFillDelete } from "react-icons/ai";
+import { FaRegEdit } from "react-icons/fa";
 const FirstComponent = ({
   name,
   courseName,
@@ -28,6 +27,8 @@ const FirstComponent = ({
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
+  const [delcon, setdelcon] = useState(false);
+
   return (
     // providing an id to uniquely identify the components
     <div id="myComponent" style={{ color: testBoolean ? "black" : "white" }}>
@@ -45,12 +46,10 @@ const FirstComponent = ({
         >
           Click here!
         </button>
-        <br></br>
-        <button onClick={(e) => setCount(count + 1)}>+</button>
+        <button onClick={(e) => setCount(count + 1)}>Click here add age</button>
         <button onClick={(e) => setCount(count > 1 ? count - 1 : count)}>
-          -
+          Click here sub age
         </button>
-        <br></br>
         <input
           placeholder="enter name of subject"
           value={subject}
@@ -90,7 +89,7 @@ const FirstComponent = ({
           // key needs to be provided for a list as during array use all the elements must be provided a unique key
           <li key={s}>
             {s}{" "}
-            <CiEdit
+            <FaRegEdit
               color="e6f3ff"
               onClick={(e) => {
                 setEditMode(true);
@@ -99,9 +98,22 @@ const FirstComponent = ({
               }}
             />
             {/* places only the elements that is not equal to s */}
-            <RiDeleteBin5Line
+            <AiFillDelete
               color="4d7a4d"
-              onClick={(e) => setSubs(subs.filter((x) => x !== s))}
+              onClick={(e) => {
+                if (delcon) {
+                  const shouldDelete = window.confirm(
+                    "Are you sure you want to delete?"
+                  );
+                  setdelcon(false);
+                  if (shouldDelete) {
+                    setSubs(subs.filter((x) => x !== s));
+                    setdelcon(false);
+                  }
+                } else {
+                  setdelcon(true);
+                }
+              }}
             />
           </li>
         ))}
