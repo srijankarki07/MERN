@@ -6,14 +6,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Designed by Srijan</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        ></a>
-        <FirstComponent
+        {/* <p>Designed by Srijan</p> */}
+
+        {/* <FirstComponent
           name="Test"
           courseName={"MERN"}
           age={23}
@@ -23,9 +18,9 @@ function App() {
           //array
           subjects={["mongodb", "ExpressJS", "ReactJS", "NodeJS"]}
           square={(x) => x * x}
-        />
+        /> */}
 
-        {/* <NepseStocks name="STOCKS" /> */}
+        <NepseStocks name="STOCKS" />
       </header>
     </div>
   );

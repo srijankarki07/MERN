@@ -1,59 +1,155 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { STOCKS } from "./constants";
-
+import "./App.css";
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
 const NepseStocks = () => {
-  const [stocks] = useState(STOCKS);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredStocks, setFilteredStocks] = useState([]); // State for stocks filtered based on the search term
+  const [stocks, setStocks] = useState(STOCKS);
+  const [securityName, setSecurityName] = useState("");
+  const [securityId, setSecurityId] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [editMode, setEditMode] = useState(false);
+  const [selectedStocks, setSelectedStocks] = useState("");
+  const [confimDelete, setConfirmDelete] = useState(" ");
+  const [searchStock, setSearchStock] = useState(" ");
 
-  // Function to filter stocks based on a search term
-  const searchStock = (word, arr) =>
-    // Using the filter method to create a new array with stocks that match the search term
-    arr.filter((x) =>
-      // Checking if the lowercase securityId of each stock includes the lowercase search term
-      x.securityId.toLowerCase().includes(word.toLowerCase())
-    );
-  // Event handler for the search button click
-  const handleSearch = () => {
-    // Calling the searchStock function with the current search term and the original list of stocks
-    const filtered = searchStock(searchTerm, stocks);
-
-    // Updating the state with the filtered list of stocks
-    setFilteredStocks(filtered);
+  const handleAddUpdateStocks = (e) => {
+    if (!editMode) {
+      setStocks([{ securityId, securityName, symbol }, ...stocks]);
+      setSecurityId("Enter Security Id ");
+      setSecurityName("Enter Security Name ");
+      setSymbol("Enter Security Symbol ");
+    } else {
+      setStocks(
+        stocks.map((s) =>
+          selectedStocks.securityId === s.securityId
+            ? { ...s, securityId, securityName, symbol }
+            : s
+        )
+      );
+    }
   };
 
-  return (
-    <div>
-      {/* Input field for entering the security ID */}
-      <input
-        className="search-bar"
-        placeholder="Enter security ID"
-        onChange={(e) => setSearchTerm(e.target.value)} // Updating the search term state on input change
-      />
-      {/* Button for triggering the search */}
-      <button className="button" onClick={handleSearch}>
-        Search
-      </button>
-      {/* List to display the filtered stocks */}
+  const handleCancel = (e) => {
+    setEditMode(false);
+    setSecurityId(" ");
+    setSecurityName(" ");
+    setSymbol(" ");
+  };
 
-      <ul>
-        {/* Mapping through the filtered stocks and rendering individual stock information */}
-        {filteredStocks.map((s) => (
-          <li key={s.securityId}>
-            {/* Displaying stock information */}
-            Name: {s.securityName}
-            {/* Nested list for additional details */}
-            <ul className="sublist">
-              <li>Stock ID: {s.securityId}</li>
-              <li>Last Traded Price: {s.lastTradedPrice}</li>
-              <li>Symbol: {s.symbol}</li>
-            </ul>
-          </li>
+  const handleDeleteStock = (e) => {
+    setStocks(stocks.filter((s) => s.securityId !== selectedStocks.securityId));
+    setSelectedStocks(null);
+    setConfirmDelete(false);
+    toast.success("Deleted");
+  };
+  useEffect(() => {
+    setStocks(
+      STOCKS.filter((s) =>
+        [s.securityId, s.securityName, s.symbol].some(
+          (x) => x.toLowerCase().includes(searchStock.toLowerCase())
+          /* s.securityName.toLowerCase().includes(searchStock.toLowerCase()) ||
+          s.securityId.toLowerCase().includes(searchStock.toLowerCase()) ||
+          s.symbol.toLowerCase().includes(searchStock.toLowerCase())*/
+        )
+      )
+    );
+  }, [searchStock]);
+
+  return (
+    <div id="stocks">
+      <h1> List of Nepse Stocks</h1>
+      <h4>Total Stocks :{stocks.length}</h4>
+      <input
+        id="securityId"
+        name="securityId"
+        placeholder="Enter Security Id"
+        value={securityId}
+        onChange={(e) => setSecurityId(e.target.value)}
+      />
+
+      <input
+        id="securityName"
+        name="securityName"
+        placeholder="Enter Security Name"
+        value={securityName}
+        onChange={(e) => setSecurityName(e.target.value)}
+      />
+
+      <input
+        id="symbol"
+        name="symbol"
+        placeholder="Enter Symbol"
+        value={symbol}
+        onChange={(e) => setSymbol(e.target.value)}
+      />
+
+      <button onClick={handleAddUpdateStocks} id="submit">
+        {editMode ? "Update" : "Add"} Stocks
+      </button>
+
+      {editMode && (
+        <button onClick={handleCancel} id="cancel">
+          Cancel
+        </button>
+      )}
+
+      <div>
+        <input
+          id="searchStock"
+          name="searchStock"
+          placeholder="Enter Stock to Search"
+          value={searchStock}
+          onChange={(e) => setSearchStock(e.target.value)}
+        />
+      </div>
+
+      {confimDelete && (
+        <div>
+          <p> Do you really want to delete {selectedStocks.securityName}?</p>
+          <button onClick={handleDeleteStock} id="delete">
+            Delete Stock
+          </button>
+          <button
+            onClick={(e) => {
+              setSelectedStocks(null);
+              setConfirmDelete(false);
+            }}
+            id="cancel-del"
+          >
+            Cancel
+          </button>
+        </div>
+      )}
+
+      <div className="container">
+        {stocks.map((s, index) => (
+          <div key={s.securityId} className="list">
+            <span className="index">{index + 1}</span>
+            <span className="id">{s.securityId}</span>
+            <span className="name">{s.securityName}</span>
+            <span className="symbol">{s.symbol}</span>
+            <FaEdit
+              onClick={(e) => {
+                setEditMode(true);
+                setSelectedStocks(s);
+                setSecurityId(s.securityId);
+                setSecurityName(s.securityName);
+                setSymbol(s.symbol);
+              }}
+            />
+
+            <FaTrash
+              onClick={(e) => {
+                setSelectedStocks(s);
+                setConfirmDelete(true);
+              }}
+            />
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
-
 // Exporting the StockComponent as the default export
 export default NepseStocks;
