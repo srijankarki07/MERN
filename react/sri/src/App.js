@@ -1,7 +1,7 @@
 import "./App.css";
 import FirstComponent from "./FirstComponent";
 import NepseStocks from "./NepseStocks";
-
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <div className="App">
@@ -19,7 +19,7 @@ function App() {
           subjects={["mongodb", "ExpressJS", "ReactJS", "NodeJS"]}
           square={(x) => x * x}
         /> */}
-
+        <ToastContainer />
         <NepseStocks name="STOCKS" />
       </header>
     </div>
