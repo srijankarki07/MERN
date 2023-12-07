@@ -1,7 +1,11 @@
 import "./App.css";
-import FirstComponent from "./FirstComponent";
+// import FirstComponent from "./FirstComponent";
 import NepseStocks from "./NepseStocks";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import SecondComponent from "./SecondComponent";
+import CashFlowCalculator from "./CashFlowCalculator";
+
 function App() {
   return (
     <div className="App">
@@ -20,7 +24,9 @@ function App() {
           square={(x) => x * x}
         /> */}
         <ToastContainer />
-        <NepseStocks name="STOCKS" />
+        {/* <NepseStocks name="STOCKS" /> */}
+        {/* <SecondComponent /> */}
+        <CashFlowCalculator />
       </header>
     </div>
   );

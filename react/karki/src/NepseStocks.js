@@ -19,6 +19,7 @@ const NepseStocks = () => {
       setSecurityId("Enter Security Id ");
       setSecurityName("Enter Security Name ");
       setSymbol("Enter Security Symbol ");
+      toast.success("Successfully Added !");
     } else {
       setStocks(
         stocks.map((s) =>
@@ -41,7 +42,7 @@ const NepseStocks = () => {
     setStocks(stocks.filter((s) => s.securityId !== selectedStocks.securityId));
     setSelectedStocks(null);
     setConfirmDelete(false);
-    toast.success("Deleted");
+    toast.success("Your Stock is Successfully Deleted");
   };
   useEffect(() => {
     setStocks(
@@ -94,16 +95,6 @@ const NepseStocks = () => {
         </button>
       )}
 
-      <div>
-        <input
-          id="searchStock"
-          name="searchStock"
-          placeholder="Enter Stock to Search"
-          value={searchStock}
-          onChange={(e) => setSearchStock(e.target.value)}
-        />
-      </div>
-
       {confimDelete && (
         <div>
           <p> Do you really want to delete {selectedStocks.securityName}?</p>
@@ -122,6 +113,24 @@ const NepseStocks = () => {
         </div>
       )}
 
+      <div>
+        <input
+          id="searchStock"
+          name="searchStock"
+          placeholder="Enter Stock to Search"
+          value={searchStock}
+          onChange={(e) => setSearchStock(e.target.value)}
+        />
+      </div>
+
+      <div className="stocks-container">
+        <div className="stocks-item heading">
+          <span className="sn">SN</span>
+          <span className="sid"> Id</span>
+          <span className="sname">Security Name</span>
+          <span className="symbol">Sym</span>
+        </div>
+      </div>
       <div className="container">
         {stocks.map((s, index) => (
           <div key={s.securityId} className="list">
