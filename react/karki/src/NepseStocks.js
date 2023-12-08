@@ -57,6 +57,11 @@ const NepseStocks = () => {
     );
   }, [searchStock]);
 
+  const symbolRef = useRef(null);
+  const securityIdRef = useRef(null);
+  const securityNameRef = useRef(null);
+
+  console.log(symbolRef, securityIdRef, securityNameRef, "check refs");
   return (
     <div id="stocks">
       <h1> List of Nepse Stocks</h1>
