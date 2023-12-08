@@ -10,7 +10,7 @@ const NepseStocks = () => {
   const [symbol, setSymbol] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [selectedStocks, setSelectedStocks] = useState("");
-  const [confimDelete, setConfirmDelete] = useState(" ");
+  const [confimDelete, setConfirmDelete] = useState(false);
   const [searchStock, setSearchStock] = useState(" ");
 
   const handleAddUpdateStocks = (e) => {
