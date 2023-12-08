@@ -75,6 +75,9 @@ const NepseStocks = () => {
         placeholder="Enter Security Name"
         value={securityName}
         onChange={(e) => setSecurityName(e.target.value)}
+        // onFocus={(e) => console.log(e)}
+        // onBlur={(e) => console.log(e)}
+        onKeyUp={(e) => (e.code === "Enter" ? console.log("enter") : void 0)}
       />
 
       <input
