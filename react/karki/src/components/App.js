@@ -41,6 +41,29 @@ function App() {
       <header className="App-header">
         {/* <p>Designed by Srijan</p> */}
 
+        <input
+          id="whatToShow"
+          name="whatToShow"
+          value={whatToShow}
+          onChange={(e) => setWhatToShow(e.target.value)}
+        />
+
+        {BUTTON.map((a) => (
+          <button id={a.id} key={a.id} onclick={(e) => setWhatToShow(a.field)}>
+            {a.title}
+          </button>
+        ))}
+        {/* <button onClick={(e) => setWhatToShow("cashFlow")}>
+          Cash Flow Calculator
+          </button>          
+          <button onClick={(e) => setWhatToShow("nepseStocks")}>
+          Nepse Stock
+          </button>          
+          <button onClick={(e) => setWhatToShow("billinglist")}>
+          Billing List
+        </button> */}
+
+        {/* <button onClick={(e) => setWhatToShow("first")}>First Component</button> */}
         {whatToShow === "first" && (
           <FirstComponent
             name="Test"
@@ -54,31 +77,6 @@ function App() {
             square={(x) => x * x}
           />
         )}
-        <input
-          id="whatToShow"
-          name="whatToShow"
-          value={whatToShow}
-          onChange={(e) => setWhatToShow(e.target.value)}
-        />
-
-        {BUTTON.map((a) => (
-          <button id={a.id} onclick={(e) => setWhatToShow(a.field)}>
-            {a.title}{" "}
-          </button>
-        ))}
-        {/* <button onClick={(e) => setWhatToShow("cashFlow")}>
-          Cash Flow Calculator
-        </button>
-
-        <button onClick={(e) => setWhatToShow("nepseStocks")}>
-          Nepse Stock
-        </button>
-
-        <button onClick={(e) => setWhatToShow("billinglist")}>
-          Billing List
-        </button> */}
-
-        {/* <button onClick={(e) => setWhatToShow("first")}>First Component</button> */}
         {whatToShow === "cashFlow" && <CashFlowCalculator />}
         {whatToShow === "nepseStocks" && (
           <NepseStocks

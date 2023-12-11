@@ -17,7 +17,7 @@ const BillingList = ({ stocks }) => {
         <span className="total">Total</span>
 
         {entries.map((a, index) => (
-          <div className="entry-item">
+          <div className="entry-item" key={a.id}>
             <span>{index + 1}</span>
             <span>{a.particular}</span>
             <span>{a.rate}</span>
@@ -51,7 +51,15 @@ const BillingList = ({ stocks }) => {
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
-          <button id="add" onClick={(e) => setEntries([...entries, {}])}>
+          <button
+            id="add"
+            onClick={(e) =>
+              setEntries([
+                ...entries,
+                { id: entries.length + 1, particular, rate, quantity },
+              ])
+            }
+          >
             Add Entry
           </button>
         </div>
