@@ -36,7 +36,12 @@ function App() {
           onChange={(e) => setWhatToShow(e.target.value)}
         />
 
-        <button onClick={(e) => setWhatToShow("cashFlow")}>
+        {BUTTON.map((a) => (
+          <button id={a.id} onclick={(e) => setWhatToShow(a.field)}>
+            {a.title}{" "}
+          </button>
+        ))}
+        {/* <button onClick={(e) => setWhatToShow("cashFlow")}>
           Cash Flow Calculator
         </button>
 
