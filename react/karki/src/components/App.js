@@ -10,6 +10,30 @@ import BillingList from "./BillingLists";
 
 function App() {
   const [whatToShow, setWhatToShow] = useState("");
+  const [stocks, setStocks] = useState(STOCKS);
+
+  const BUTTON = [
+    {
+      title: "First Component",
+      id: "firstcomponent-btn",
+      field: "firstcomponent",
+    },
+    {
+      title: "Nepse Stocks",
+      id: "nepsestocks-btn",
+      field: "nepsestocks",
+    },
+    {
+      title: "Cash Flow Calculator",
+      id: "cashflowcalculator-btn",
+      field: "cashflowcalculator",
+    },
+    {
+      title: "Billing List",
+      id: "billinglist-btn",
+      field: "billinglist",
+    },
+  ];
 
   return (
     <div className="App">
