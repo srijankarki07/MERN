@@ -1,0 +1,136 @@
+.App {
+  text-align: center;
+  font-family: monospace;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.container {
+  width: 100%;
+}
+
+.container .list {
+  display: flex;
+  margin: 20px auto;
+}
+
+.container .list .id {
+  flex-basis: 10%;
+}
+
+.container .list .index {
+  flex-basis: 5%;
+}
+
+.container .list .name {
+  flex-basis: 50%;
+  text-align: justify;
+  margin: auto;
+}
+
+.container .list .symbol {
+  flex-basis: 20%;
+  text-align: justify;
+}
+
+.stocks-container .stocks-item {
+  display: flex;
+  margin: 10px auto;
+}
+
+.stocks-container .stocks-item.heading {
+  color: #21a921;
+}
+
+.stocks-container .stocks-item .sn {
+  flex-basis: 5%;
+}
+.stocks-container .stocks-item .sname {
+  flex-basis: 58%;
+}
+.stocks-container .stocks-item .symbol {
+  flex-basis: 10%;
+}
+.stocks-container .stocks-item .sid {
+  flex-basis: 10%;
+}
+
+.delete-modal-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  background-color: #ffffff73;
+}
+
+.delete-modal-container .modal-body {
+  background-color: rgb(5, 48, 34);
+  padding: 15px 30px;
+  border-radius: 8px;
+}
+
+.inputbox {
+  border-radius: 8px;
+  background-color: #04aa6d30;
+  border: #dee4e2;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px 6px;
+  cursor: pointer;
+}
+.yearandopeneing {
+  border-radius: 8px;
+  background-color: #04aa6d30;
+  border: #dee4e2;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px 6px;
+  cursor: pointer;
+}
+
+.deposits {
+  border-radius: 8px;
+  background-color: #048caa30;
+  border: #dee4e2;
+  color: white;
+  padding: 15px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px 4px;
+  cursor: pointer;
+}
+.answer {
+  border-radius: 8px;
+  background-color: #048caa30;
+  border: #dee4e2;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 36px;
+  margin: 6px 6px;
+  cursor: pointer;
+}
