@@ -55,6 +55,9 @@ const BillingList = ({ stocks }) => {
             Add Entry
           </button>
         </div>
+        <div>
+          <p>Total : {entries.reduce((a, v) => a + v.rate * v.quantity, 0)}</p>
+        </div>
         {/* <p>Total:{entries.reduce((a, v) => a + (v.rate * v.quantity, 0))}</p> */}
       </div>
     </div>
