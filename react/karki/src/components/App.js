@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CashFlowCalculator from "./CashFlowCalculator";
 import { useState } from "react";
 import BillingList from "./BillingLists";
+import { STOCKS } from "./constants";
 
 function App() {
   const [whatToShow, setWhatToShow] = useState("");
@@ -78,7 +79,7 @@ function App() {
         </button> */}
 
         {/* <button onClick={(e) => setWhatToShow("first")}>First Component</button> */}
-        {whatToShow === "cashFlow" && <CashFlowCalculator/>}
+        {whatToShow === "cashFlow" && <CashFlowCalculator />}
         {whatToShow === "nepseStocks" && (
           <NepseStocks
             setWhatToShow={setWhatToShow}
