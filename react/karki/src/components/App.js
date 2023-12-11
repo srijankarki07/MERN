@@ -75,12 +75,20 @@ function App() {
 
         <button onClick={(e) => setWhatToShow("billinglist")}>
           Billing List
-        </button>
+        </button> */}
 
-        <button onClick={(e) => setWhatToShow("first")}>First Component</button>
-        {whatToShow === "cashFlow" && <CashFlowCalculator />}
-        {whatToShow === "nepseStocks" && <NepseStocks />}
-        {whatToShow === "billinglist" && <BillingList />}
+        {/* <button onClick={(e) => setWhatToShow("first")}>First Component</button> */}
+        {whatToShow === "cashFlow" && <CashFlowCalculator/>}
+        {whatToShow === "nepseStocks" && (
+          <NepseStocks
+            setWhatToShow={setWhatToShow}
+            BUTTON={BUTTON}
+            setStocks={setStocks}
+            stocks={stocks}
+          />
+        )}
+
+        {whatToShow === "billinglist" && <BillingList stocks={stocks} />}
 
         <ToastContainer />
         {/* <SecondComponent /> */}
