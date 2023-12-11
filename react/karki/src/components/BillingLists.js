@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { STOCKS } from "./constants";
 
-const BillingList = () => {
+const BillingList = ({ stocks }) => {
   const [entries, setEntries] = useState([]);
   const [particular, setParticular] = useState();
   const [rate, setRate] = useState("");
@@ -31,7 +31,7 @@ const BillingList = () => {
             value={particular}
             onChange={(e) => setParticular(e.target.value)}
           >
-            {STOCKS.map((s) => (
+            {stocks.map((s) => (
               <option key={s.securityId} value={`${s.securityName}${s.symbol}`}>
                 {s.securityName} {s.symbol} {s.securityId}
               </option>
