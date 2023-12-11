@@ -15,7 +15,7 @@ const NepseStocks = () => {
 
   const handleAddUpdateStocks = (e) => {
     if ([securityId, securityName, symbol].some((s) => s === "")) {
-      toast.error("Input field can't be empty");
+      toast.warning("Input field can't be empty");
     } else {
       if (!editMode) {
         setStocks([{ securityId, securityName, symbol }, ...stocks]);
@@ -31,6 +31,7 @@ const NepseStocks = () => {
               : s
           )
         );
+        toast.success("Stock Updated !");
       }
     }
   };
