@@ -13,12 +13,15 @@ const NepseStocks = () => {
   const [confimDelete, setConfirmDelete] = useState(false);
   const [searchStock, setSearchStock] = useState(" ");
 
+  const [foundStocks, setFoundStocks] = useState(stocks);
+
   const handleAddUpdateStocks = (e) => {
     if ([securityId, securityName, symbol].some((s) => s === "")) {
       toast.warning("Input field can't be empty");
     } else {
       if (!editMode) {
         setStocks([{ securityId, securityName, symbol }, ...stocks]);
+        setFoundStocks([{ securityId, securityName, symbol }, ...stocks]);
         setSecurityId();
         setSecurityName();
         setSymbol();
@@ -45,13 +48,16 @@ const NepseStocks = () => {
 
   const handleDeleteStock = (e) => {
     setStocks(stocks.filter((s) => s.securityId !== selectedStocks.securityId));
+    setFoundStocks(
+      stocks.filter((s) => s.securityId !== selectedStocks.securityId)
+    );
     setSelectedStocks(null);
     setConfirmDelete(false);
     toast.success("Your Stock is Successfully Deleted");
   };
   useEffect(() => {
-    setStocks(
-      STOCKS.filter((s) =>
+    setFoundStocks(
+      stocks.filter((s) =>
         [s.securityId, s.securityName, s.symbol].some(
           (x) => x.toLowerCase().includes(searchStock.toLowerCase())
           /* s.securityName.toLowerCase().includes(searchStock.toLowerCase()) ||
