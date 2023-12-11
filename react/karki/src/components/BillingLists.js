@@ -5,7 +5,7 @@ const BillingList = () => {
   const [entries, setEntries] = useState([]);
   const [particular, setParticular] = useState();
   const [rate, setRate] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(10);
   return (
     <div>
       <h1> Billing List</h1>
@@ -51,7 +51,9 @@ const BillingList = () => {
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
           />
-          <button>Add Entry</button>
+          <button id="add" onClick={(e) => setEntries([...entries, {}])}>
+            Add Entry
+          </button>
         </div>
         {/* <p>Total:{entries.reduce((a, v) => a + (v.rate * v.quantity, 0))}</p> */}
       </div>
