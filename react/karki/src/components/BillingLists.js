@@ -10,11 +10,12 @@ const BillingList = () => {
     <div>
       <h1> Billing List</h1>
       <div className="bill-container">
-        <span>SN</span>
-        <span>Particulars</span>
-        <span>Rate</span>
-        <span>Qty</span>
-        <span>Total</span>
+        <span className="sn">SN</span>
+        <span className="par">Particulars</span>
+        <span className="rate">Rate</span>
+        <span className="qty">Qty</span>
+        <span className="total">Total</span>
+
         {entries.map((a, index) => (
           <div className="entry-item">
             <span>{index + 1}</span>
