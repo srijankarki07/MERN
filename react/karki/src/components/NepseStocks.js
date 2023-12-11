@@ -171,7 +171,7 @@ const NepseStocks = () => {
         </div>
       </div>
       <div className="container">
-        {stocks.map((s, index) => (
+        {foundStocks.map((s, index) => (
           <div key={s.securityId} className="list">
             <span className="index">{index + 1}</span>
             <span className="id">{s.securityId}</span>
