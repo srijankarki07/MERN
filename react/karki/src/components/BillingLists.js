@@ -6,6 +6,21 @@ const BillingList = ({ stocks }) => {
   const [particular, setParticular] = useState();
   const [rate, setRate] = useState("");
   const [quantity, setQuantity] = useState(10);
+  const rateRef = useRef(null);
+  const quantityRef = useRef(null);
+  const addRef = useRef(null);
+
+    const handlePressEnterAtQuantity = (e) => {
+    if (e.code === "Enter") {
+      setEntries([
+        ...entries,
+        { id: entries.length + 1, particular, rate, quantity },
+      ]);
+      quantityRef.current?.focus();
+    }
+  };
+
+  
   return (
     <div>
       <h1> Billing List</h1>
@@ -43,15 +58,25 @@ const BillingList = ({ stocks }) => {
             placeholder="Enter rate"
             value={rate}
             onChange={(e) => setRate(e.target.value)}
-          />{" "}
+              ref={rateRef}
+          onKeyUp={(e) =>
+            e.code === "Enter" ? quantityRef.current?.focus() : void 0
+          }
+          />
+
+            
           <input
             id="quantity"
             name="quantity"
             placeholder="Enter quantity"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
+               ref={quantityRef}
+          onKeyUp={handlePressEnterAtQuantity}
+        />
           />
           <button
+            ref={addRef}
             id="add"
             onClick={(e) =>
               setEntries([
