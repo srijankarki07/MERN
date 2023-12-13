@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { STOCKS } from "./constants";
+// import { STOCKS } from "./constants";
+import Select from "react-select";
 
 const BillingList = ({ stocks }) => {
   const [entries, setEntries] = useState([]);
@@ -19,6 +20,8 @@ const BillingList = ({ stocks }) => {
       quantityRef.current?.focus();
     }
   };
+
+  const handleStockChange = (selectedOption) => setParticular(selectedOption);
 
   
   return (
@@ -41,17 +44,19 @@ const BillingList = ({ stocks }) => {
           </div>
         ))}
         <div className="bill-input-container">
-          <span>-</span>
-          <select
-            value={particular}
-            onChange={(e) => setParticular(e.target.value)}
-          >
-            {stocks.map((s) => (
-              <option key={s.securityId} value={`${s.securityName}${s.symbol}`}>
-                {s.securityName} {s.symbol} {s.securityId}
-              </option>
-            ))}
-          </select>
+          <span></span>
+          <Select
+          className="parti"
+          options={stocks.map((s) => ({
+            label: `${s.securityName} ${s.symbol} ${s.securityId}`,
+            value: s.symbol,
+          }))}
+          value={particular}
+          onChange={handleStockChange} >
+            <Select/>
+
+
+            
           <input
             id="rate"
             name="rate"
@@ -81,7 +86,11 @@ const BillingList = ({ stocks }) => {
             onClick={(e) =>
               setEntries([
                 ...entries,
-                { id: entries.length + 1, particular, rate, quantity },
+                { id: entries.length + 1, 
+                 particular: particular.value,
+                 rate, 
+                 quantity,
+                },
               ])
             }
           >
