@@ -53,7 +53,7 @@ const BillingList = ({ stocks }) => {
           }))}
           value={particular}
           onChange={handleStockChange} >
-            <Select/>
+            </Select>
 
 
             
